@@ -2,7 +2,7 @@
 * @Author: chenyizhuo.yizhuoc
 * @Date:   2020-12-02 17:25:01
 * @Last Modified by:   chenyizhuo.yizhuoc
-* @Last Modified time: 2020-12-02 18:14:48
+* @Last Modified time: 2020-12-02 18:26:39
 */
 
 #include <stdio.h>
@@ -48,6 +48,27 @@ void nextPermutation(int *nums, int numsSize) {
 		}
 	}
 	swap(&nums[startIndex], &nums[nextIndex]);
+
+	// !!!: Unnecessary to qsort. Worse, this is the bad case for qsort, because the left numbers are reverse-ordered.
+	// So just reverse the left arrays.
+
+
+	/*
+	void reverse(int *nums, int start);
+
+	int i = nums.length - 2;
+    while (i >= 0 && nums[i + 1] <= nums[i]) {
+        i--;
+    }
+    if (i >= 0) {
+        int j = nums.length - 1;
+        while (j >= 0 && nums[j] <= nums[i]) {
+            j--;
+        }
+        swap(nums, i, j);
+    }
+    reverse(nums, i + 1);
+    */
 
 	// 3. sort numbers [startIndex + 1, numsSize)
 	qsort(nums + startIndex + 1, numsSize - startIndex - 1, sizeof(int), cmp);
