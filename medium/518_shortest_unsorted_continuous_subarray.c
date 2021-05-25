@@ -2,9 +2,37 @@
 * @Author: chenyizhuo.yizhuoc
 * @Date:   2021-05-25 11:15:10
 * @Last Modified by:   chenyizhuo.yizhuoc
-* @Last Modified time: 2021-05-25 11:15:17
+* @Last Modified time: 2021-05-25 11:20:56
 */
 
+
+int findUnsortedSubarrayOptimistic(int* nums, int numsSize){
+    int start = 0;
+    int end = -1;
+    
+    int left = 0;
+    int right = numsSize - 1;
+    int min = INT_MAX;
+    int max = INT_MIN;
+    while (right >= 0) {
+        if (nums[left] >= max) {
+            max = nums[left];
+        } else {
+            end = left;
+        }
+        
+        if (nums[right] <= min) {
+            min = nums[right];
+        } else {
+            start = right;
+        }
+        
+        left++;
+        right--;
+    }
+    
+    return end - start + 1;
+}
 
 int findUnsortedSubarray(int* nums, int numsSize){
     int start = numsSize - 1;
